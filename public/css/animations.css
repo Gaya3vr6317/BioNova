@@ -1,0 +1,318 @@
+/* Advanced Animations for Space Biology Dashboard */
+
+/* Particle System for Background */
+.particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.particle {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    border-radius: 50%;
+    animation: particleFloat linear infinite;
+}
+
+@keyframes particleFloat {
+    from { 
+        transform: translateY(100vh) translateX(0); 
+        opacity: 0; 
+    }
+    10% { 
+        opacity: 1; 
+    }
+    90% { 
+        opacity: 1; 
+    }
+    to { 
+        transform: translateY(-100px) translateX(100px); 
+        opacity: 0; 
+    }
+}
+
+/* Search Results Highlight */
+.search-highlight {
+    background: linear-gradient(120deg, transparent 0%, rgba(0, 243, 255, 0.3) 50%, transparent 100%);
+    background-size: 200% 100%;
+    animation: highlightPulse 2s ease-in-out;
+}
+
+@keyframes highlightPulse {
+    0% { background-position: -100% 0; }
+    100% { background-position: 200% 0; }
+}
+
+/* Chart Animations */
+.pie-chart {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+    border-radius: 50%;
+}
+
+.chart-slice {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 50% 100%);
+    transform: rotate(var(--start-angle));
+    background: conic-gradient(from var(--start-angle), var(--slice-color) 0% var(--slice-angle), transparent var(--slice-angle) 100%);
+    animation: sliceGrow 1s ease-out;
+}
+
+@keyframes sliceGrow {
+    from { transform: rotate(var(--start-angle)) scale(0); }
+    to { transform: rotate(var(--start-angle)) scale(1); }
+}
+
+.bar-chart {
+    display: flex;
+    align-items: end;
+    justify-content: space-around;
+    height: 100%;
+    padding: 20px 0;
+}
+
+.chart-bar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+
+.chart-bar {
+    width: 30px;
+    background: linear-gradient(to top, var(--neon-blue), var(--neon-purple));
+    border-radius: 3px 3px 0 0;
+    animation: growBar 1s ease-out;
+    transform-origin: bottom;
+}
+
+@keyframes growBar {
+    from { transform: scaleY(0); }
+    to { transform: scaleY(1); }
+}
+
+/* DNA Helix Animation */
+.dna-animation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    margin: 2rem 0;
+}
+
+.dna-strand {
+    display: flex;
+    gap: 10px;
+}
+
+.dna-base {
+    width: 8px;
+    height: 30px;
+    background: var(--neon-blue);
+    border-radius: 4px;
+    animation: dnaBounce 2s ease-in-out infinite;
+}
+
+.dna-base:nth-child(2n) {
+    background: var(--neon-purple);
+    animation-delay: 0.5s;
+}
+
+@keyframes dnaBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Microscope Zoom Effect */
+.microscope-view {
+    perspective: 1000px;
+    display: inline-block;
+}
+
+.microscope-slide {
+    transition: all 0.5s ease;
+    transform-origin: center;
+}
+
+.microscope-view:hover .microscope-slide {
+    transform: scale(1.2);
+    filter: brightness(1.2);
+}
+
+/* Cell Division Animation */
+.cell-division {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto;
+}
+
+.cell {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background: radial-gradient(circle, var(--neon-purple), transparent);
+    border-radius: 50%;
+    animation: divide 4s ease-in-out infinite;
+}
+
+.cell:nth-child(2) {
+    animation-delay: 2s;
+}
+
+@keyframes divide {
+    0%, 100% { transform: scale(1) translateX(0); opacity: 1; }
+    50% { transform: scale(0.8) translateX(20px); opacity: 0.7; }
+}
+
+/* Floating Elements */
+.float-slow {
+    animation: floatSlow 6s ease-in-out infinite;
+}
+
+@keyframes floatSlow {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+}
+
+.float-fast {
+    animation: floatFast 3s ease-in-out infinite;
+}
+
+@keyframes floatFast {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(5deg); }
+}
+
+/* Text Typing Effect */
+.typing-text {
+    overflow: hidden;
+    border-right: 2px solid var(--neon-blue);
+    white-space: nowrap;
+    animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50% { border-color: var(--neon-blue); }
+}
+
+/* Button Ripple Effect */
+.btn-ripple {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-ripple::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn-ripple:active::after {
+    width: 300px;
+    height: 300px;
+}
+
+/* Loading States */
+.loading-shimmer {
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+/* Gravity Well Effect */
+.gravity-well {
+    position: relative;
+}
+
+.gravity-well::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, transparent 0%, rgba(0, 243, 255, 0.1) 100%);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    animation: gravityPulse 4s ease-in-out infinite;
+}
+
+@keyframes gravityPulse {
+    0%, 100% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+    50% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+
+/* Orbit Animation */
+.orbit-system {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+}
+
+.central-body {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+    background: var(--neon-purple);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.orbiting-body {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background: var(--neon-blue);
+    border-radius: 50%;
+    animation: orbit 5s linear infinite;
+}
+
+@keyframes orbit {
+    from { transform: rotate(0deg) translateX(80px) rotate(0deg); }
+    to { transform: rotate(360deg) translateX(80px) rotate(-360deg); }
+}
+
+/* Responsive Animations */
+@media (max-width: 768px) {
+    .chart-slice {
+        animation: mobileSliceGrow 0.8s ease-out;
+    }
+    
+    @keyframes mobileSliceGrow {
+        from { transform: rotate(var(--start-angle)) scale(0) translateX(-20px); }
+        to { transform: rotate(var(--start-angle)) scale(1) translateX(0); }
+    }
+}

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Space Biology</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/animations.css">
+    <link rel="stylesheet" href="/css/responsive.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="stars"></div>
+    <div class="twinkling"></div>
+    
+    <nav class="navbar">
+        <div class="nav-brand">
+            <div class="logo">🌌</div>
+            <span>Space Biology Admin</span>
+        </div>
+        
+        <div class="nav-links">
+            <a href="/admin" class="nav-link active"><i class="fas fa-cog"></i> Admin Panel</a>
+            <a href="/dashboard" class="nav-link"><i class="fas fa-chart-bar"></i> User Dashboard</a>
+            <a href="/logout" class="nav-link logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <h1>Admin Content Management</h1>
+            <p>Manage keyword-based content for user searches</p>
+            <div class="admin-badge">
+                <i class="fas fa-shield-alt"></i> Administrator Mode
+            </div>
+        </header>
+
+        <div class="admin-sections">
+            <!-- Add Content Section -->
+            <div class="admin-section">
+                <h2><i class="fas fa-plus-circle"></i> Add New Content</h2>
+                <form id="addContentForm" class="admin-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="keyword"><i class="fas fa-key"></i> Keyword *</label>
+                            <input type="text" id="keyword" name="keyword" required 
+                                   placeholder="e.g., microgravity, iss, plant-growth">
+                            <small>This keyword will trigger the content when users search for it</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="category"><i class="fas fa-tag"></i> Category</label>
+                            <select id="category" name="category">
+                                <option value="biology">Biology</option>
+                                <option value="mission">Mission</option>
+                                <option value="organism">Organism</option>
+                                <option value="technology">Technology</option>
+                                <option value="general" selected>General</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="title"><i class="fas fa-heading"></i> Title *</label>
+                        <input type="text" id="title" name="title" required 
+                               placeholder="Enter a descriptive title">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="content"><i class="fas fa-file-alt"></i> Content *</label>
+                        <textarea id="content" name="content" rows="8" required 
+                                  placeholder="Enter the content that will be displayed when users search for this keyword..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-primary">
+                        <i class="fas fa-save"></i> Save Content
+                    </button>
+                </form>
+            </div>
+
+            <!-- Manage Content Section -->
+            <div class="admin-section">
+                <h2><i class="fas fa-edit"></i> Manage Existing Content</h2>
+                <div class="content-actions">
+                    <button id="refreshContent" class="btn-secondary">
+                        <i class="fas fa-sync"></i> Refresh List
+                    </button>
+                </div>
+                
+                <div id="contentList" class="content-list">
+                    <div class="loading">Loading content...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Content Modal -->
+    <div id="editModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Edit Content</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <form id="editContentForm" class="admin-form">
+                <input type="hidden" id="editId" name="id">
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="editKeyword">Keyword</label>
+                        <input type="text" id="editKeyword" name="keyword" readonly>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="editCategory">Category</label>
+                        <select id="editCategory" name="category">
+                            <option value="biology">Biology</option>
+                            <option value="mission">Mission</option>
+                            <option value="organism">Organism</option>
+                            <option value="technology">Technology</option>
+                            <option value="general">General</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="editTitle">Title</label>
+                    <input type="text" id="editTitle" name="title" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="editContent">Content</label>
+                    <textarea id="editContent" name="content" rows="6" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="editIsActive" name="isActive">
+                        <span class="checkmark"></span>
+                        Active (visible to users)
+                    </label>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="submit" class="btn-primary">
+                        <i class="fas fa-save"></i> Update Content
+                    </button>
+                    <button type="button" id="deleteContent" class="btn-danger">
+                        <i class="fas fa-trash"></i> Delete
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="/js/admin.js"></script>
+</body>
+</html>

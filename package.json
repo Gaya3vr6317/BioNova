@@ -1,0 +1,28 @@
+{
+  "name": "space-biology-dashboard",
+  "version": "1.0.0",
+  "description": "NASA Space Biology Knowledge Engine",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "dev": "nodemon server/server.js",
+    "fix-port": "node scripts/fix-port.js",
+    "kill-3000": "npx kill-port 3000",
+    "test": "node server/server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^8.0.3",
+    "bcryptjs": "^2.4.3",
+    "express-session": "^1.17.3",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "nodemailer": "^6.9.4",
+    "axios": "^1.6.7",
+    "cheerio": "^1.0.0-rc.12"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1",
+    "kill-port": "^2.0.0"
+  }
+}

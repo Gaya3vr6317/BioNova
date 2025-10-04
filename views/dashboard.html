@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Biology Dashboard</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/animations.css">
+    <link rel="stylesheet" href="/css/responsive.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="stars"></div>
+    <div class="twinkling"></div>
+    
+    <nav class="navbar">
+        <div class="nav-brand">
+            <div class="logo">🌌</div>
+            <span>Space Biology Dashboard</span>
+        </div>
+        
+        <div class="nav-links">
+            <a href="/dashboard" class="nav-link active"><i class="fas fa-chart-bar"></i> Dashboard</a>
+            <a href="/about" class="nav-link"><i class="fas fa-info-circle"></i> About</a>
+            <a href="/contact" class="nav-link"><i class="fas fa-envelope"></i> Contact</a>
+            <a href="/logout" class="nav-link logout"><i class="fas fa-rocket"></i> Logout</a>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <h1>BioNova</h1>
+            <p>Explore decades of NASA biological research in space</p>
+            <div class="orbit-system">
+                <div class="central-body"></div>
+                <div class="orbiting-body"></div>
+            </div>
+        </header>
+
+        <!-- Removed top search-section as requested -->
+
+        <!-- Removed filters-section as requested -->
+
+        <!-- Removed stats-cards as requested -->
+
+        <!-- Removed charts-section as requested -->
+
+        <!-- Removed Research Experiments section as requested -->
+
+        <div class="experiments-section">
+            <h2><i class="fas fa-newspaper"></i> Articles Presented</h2>
+            <div class="search-container" style="margin-bottom: 12px;">
+                <i class="fas fa-search"></i>
+                <input type="text" id="articleSearchInput" placeholder="Search articles by title, authors, journal, abstract...">
+                <button id="articleSearchBtn" class="btn-primary">
+                    <i class="fas fa-search"></i> Search Articles
+                </button>
+            </div>
+            <div id="articlesList" class="experiments-grid">
+                <div class="loading-shimmer" style="height: 160px; border-radius: 15px; grid-column: 1 / -1;"></div>
+            </div>
+            <div class="pagination">
+                <button id="prevArticlesPage" class="btn-secondary">
+                    <i class="fas fa-chevron-left"></i> Previous
+                </button>
+                <span id="articlesPageInfo">Page 1 of 1</span>
+                <button id="nextArticlesPage" class="btn-secondary">
+                    Next <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="quick-actions">
+            <h3><i class="fas fa-bolt"></i> Quick Actions</h3>
+            <div class="action-buttons">
+                <button class="btn-primary" onclick="window.open('https://genelab.nasa.gov', '_blank')">
+                    <i class="fas fa-dna"></i> GeneLab Database
+                </button>
+                <button class="btn-primary" onclick="window.open('https://lsda.jsc.nasa.gov', '_blank')">
+                    <i class="fas fa-archive"></i> LSDA Archive
+                </button>
+                <button class="btn-primary" onclick="window.location.href='/contact'">
+                    <i class="fas fa-envelope"></i> Contact Research Team
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/dashboard.js"></script>
+    <script src="/js/animations.js"></script>
+    <script src="/js/search.js"></script>
+    <script>
+    // Articles Presented integration
+    (function(){
+        let articlePage = 1;
+        let articleQuery = '';
+
+        async function loadArticles(page = 1, search = '') {
+            const params = new URLSearchParams({ page, limit: 9 });
+            if (search) params.append('search', search);
+            const res = await fetch(`/api/articles?${params.toString()}`);
+            const data = await res.json();
+            renderArticles(data.articles || []);
+            updateArticlesPagination(data.totalPages || 0, data.currentPage || 1);
+        }
+
+        function renderArticles(list) {
+            const container = document.getElementById('articlesList');
+            if (!container) return;
+            if (!list.length) {
+                container.innerHTML = `
+                    <div class="no-results">
+                        <div class="no-results-icon">📰</div>
+                        <h3>No articles found</h3>
+                        <p>Try adjusting your search criteria</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // Helper to escape HTML
+            const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+            // Enhanced fetching + analyzer (web fetching support)
+            async function fetchArticleContent(url) {
+                try {
+                    const response = await fetch('/api/fetch-article', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ url })
+                    });
+                    if (!response.ok) throw new Error('Failed to fetch article');
+                    const data = await response.json();
+                    return data.content || null;
+                } catch (error) {
+                    console.error('Error fetching article:', error);
+                    return null;
+                }
+            }
+
+            function analyzeTextEnhanced(article, fullArticleText = null) {
+                const sourceText = fullArticleText || article.content || '';
+                const fullText = `${article.title ? article.title + '. ' : ''}${sourceText}`;
+                const sentences = fullText.match(/[^.!?]+[.!?]+/g) || [];
+                if (sentences.length === 0) return article.content || 'No content available to summarize.';
+                const spaceKeywords = [
+                    'observatory','mission','space','telescope','astronomy','stellar','galactic','planetary','cosmic','celestial',
+                    'orbit','satellite','exploration','universe','nasa','solar','interplanetary','interstellar','earth','array',
+                    'biology','microgravity','iss','organism','experiment','study','research','journal','abstract','cells','genes','protein','radiation','gravity','astronaut','station','laboratory','science','discovery','findings','results','analysis','molecules','tissue','plants','bacteria','microbes'
+                ];
+                const words = fullText.toLowerCase().split(/\W+/).filter(w => w.length > 3);
+                const wordFreq = {};
+                for (const word of words) {
+                    wordFreq[word] = (wordFreq[word] || 0) + 1;
+                    if (spaceKeywords.includes(word)) wordFreq[word] += 3;
+                }
+                const topWords = Object.entries(wordFreq).sort((a,b) => b[1]-a[1]).slice(0, 20).map(([w]) => w);
+                const scored = sentences.map((sentence, idx) => {
+                    const s = sentence.toLowerCase();
+                    let score = 0;
+                    for (const w of topWords) {
+                        const m = s.match(new RegExp(`\\b${w}\\b`, 'g'));
+                        if (m) score += m.length;
+                    }
+                    if (idx === 0) score += 3;
+                    if (idx === 1) score += 2;
+                    if (idx < 5) score += 1;
+                    const wc = sentence.split(/\s+/).length;
+                    if (wc < 8) score -= 2;
+                    if (wc > 40) score -= 1;
+                    if (wc >= 12 && wc <= 25) score += 1;
+                    if (/\d+/.test(sentence)) score += 1;
+                    return { sentence: sentence.trim(), score, index: idx };
+                });
+                const n = Math.min(5, Math.max(3, Math.ceil(sentences.length * 0.15)));
+                const top = scored.sort((a,b) => b.score - a.score).slice(0, n).sort((a,b) => a.index - b.index).map(s => s.sentence);
+                let summary = top.join(' ');
+                if (summary.length < 100 && sourceText) {
+                    const clip = sourceText.trim();
+                    summary = clip.slice(0, 400) + (clip.length > 400 ? '…' : '');
+                }
+                return summary;
+            }
+
+            container.innerHTML = list.map(a => {
+                // Determine link: prefer normalized url, else any http(s) field in raw
+                let link = a && a.url ? a.url : '';
+                if (!link && a && a.raw) {
+                    for (const v of Object.values(a.raw)) {
+                        if (typeof v === 'string' && /^https?:\/\//.test(v)) { link = v; break; }
+                    }
+                }
+
+                // Build details from all CSV columns
+                let details = '';
+                if (a && a.raw) {
+                    details = Object.entries(a.raw).map(([k, v]) => {
+                        if (v === null || v === undefined) return '';
+                        const val = String(v).trim();
+                        if (!val) return '';
+                        return `<div class="article-field"><span class="field-key">${esc(k)}</span>: <span class="field-value">${esc(val)}</span></div>`;
+                    }).join('');
+                }
+
+                
+                return `
+                <div class="experiment-card" data-id="${esc(a.id || '')}">
+                    <div class="experiment-header">
+                        <h3 class="experiment-title">${esc(a.title || a.raw?.Title || a.raw?.title || 'Untitled')}</h3>
+                        <span class="experiment-year">${esc(a.year || a.raw?.Year || a.raw?.year || '')}</span>
+                    </div>
+                    <div class="experiment-meta">
+                        ${a.authors ? `<span class="meta-tag">${esc(a.authors)}</span>` : ''}
+                        ${a.journal ? `<span class="meta-tag">${esc(a.journal)}</span>` : ''}
+                    </div>
+                    <div class="article-details">
+                        ${details || '<em>No additional fields</em>'}
+                    </div>
+                    <div class="experiment-footer">
+                        ${link ? `<a href="${esc(link)}" target="_blank" class="experiment-link">Open <i class="fas fa-external-link-alt"></i></a>` : '<span class="experiment-link disabled">No link</span>'}
+                        <button type="button" class="btn-secondary btn-summary"><i class="fas fa-brain"></i> AI Summary</button>
+                    </div>
+                    <div class="article-summary-overlay hidden" role="dialog" aria-modal="true">
+                        <div class="article-summary-header">
+                            <span><i class="fas fa-brain"></i> AI Summary</span>
+                            <button type="button" class="summary-close" aria-label="Close">&times;</button>
+                        </div>
+                        <div class="article-summary-body"></div>
+                    </div>
+                </div>`;
+            }).join('');
+
+            // Wire summary open/close events (enhanced: fetch full article then analyze)
+            container.querySelectorAll('.btn-summary').forEach(btn => {
+                btn.addEventListener('click', async (e) => {
+                    const card = e.currentTarget.closest('.experiment-card');
+                    const overlay = card.querySelector('.article-summary-overlay');
+                    const body = overlay.querySelector('.article-summary-body');
+                    if (body) {
+                        body.innerHTML = `
+                            <div class="loading"></div>
+                            <p style="margin-top:8px;color: var(--text-secondary)">Preparing to fetch article...</p>
+                        `;
+                        overlay.classList.remove('hidden');
+                        try {
+                            const title = card.querySelector('.experiment-title')?.textContent?.trim() || '';
+                            const linkEl = card.querySelector('a.experiment-link[href]');
+                            const url = linkEl ? linkEl.getAttribute('href') : '';
+                            const localContent = card.querySelector('.article-details')?.innerText || '';
+
+                            let fullArticleText = null;
+                            let fetchError = null;
+                            if (url && url !== '#' && !url.includes('javascript:') && url.startsWith('http')) {
+                                body.innerHTML = `
+                                    <div class="loading"></div>
+                                    <p style="margin-top:8px;color: var(--text-secondary)">📡 Downloading article from source...<br><small style="font-size:0.85em;opacity:0.8;">${esc(url)}</small></p>
+                                `;
+                                try {
+                                    fullArticleText = await fetchArticleContent(url);
+                                    if (fullArticleText && fullArticleText.length > 100) {
+                                        body.innerHTML = `
+                                            <div class="loading"></div>
+                                            <p style="margin-top:8px;color: var(--text-secondary)">🧠 Analyzing ${fullArticleText.length.toLocaleString()} characters...</p>
+                                        `;
+                                    } else {
+                                        fetchError = 'Could not extract enough content from article URL';
+                                        fullArticleText = null;
+                                    }
+                                } catch (err) {
+                                    console.error('Fetch error:', err);
+                                    fetchError = err.message || 'Failed to fetch article';
+                                    fullArticleText = null;
+                                }
+                            }
+
+                            const summary = analyzeTextEnhanced({ title, url, content: localContent }, fullArticleText);
+
+                            let indicator = '';
+                            if (fullArticleText) {
+                                indicator = '<div style="display:inline-flex;align-items:center;gap:6px;padding:6px 12px;background:rgba(34,197,94,0.15);border:1px solid rgba(34,197,94,0.3);border-radius:6px;margin-bottom:12px;"><span style="color:#22c55e;">✓</span><span style="color:#86efac;font-size:0.9em;font-weight:500;">Analyzed from full article</span></div>';
+                            } else if (fetchError) {
+                                indicator = `<div style="display:inline-flex;align-items:center;gap:6px;padding:6px 12px;background:rgba(234,179,8,0.15);border:1px solid rgba(234,179,8,0.3);border-radius:6px;margin-bottom:12px;"><span style="color:#eab308;">⚠</span><span style="color:#fde047;font-size:0.9em;">${esc(fetchError)} - Using local data</span></div>`;
+                            } else {
+                                indicator = '<div style="display:inline-flex;align-items:center;gap:6px;padding:6px 12px;background:rgba(100,116,139,0.15);border:1px solid rgba(100,116,139,0.3);border-radius:6px;margin-bottom:12px;"><span style="color:#94a3b8;">ℹ</span><span style="color:#cbd5e1;font-size:0.9em;">Generated from local data</span></div>';
+                            }
+
+                            body.innerHTML = `
+                                ${indicator}
+                                <p style="line-height:1.7;margin-top:12px;text-align:justify;">${esc(summary)}</p>
+                                ${fullArticleText ? `<small style="color:var(--text-secondary);margin-top:16px;display:block;opacity:0.7;">Source: ${fullArticleText.length.toLocaleString()} characters analyzed</small>` : ''}
+                            `;
+                        } catch (err) {
+                            console.error('Summary generation error:', err);
+                            body.innerHTML = `<p style="color:#fca5a5">Unable to generate summary. ${esc(err.message || 'Please try again.')}</p>`;
+                        }
+                    }
+                });
+            });
+            container.querySelectorAll('.summary-close').forEach(closeBtn => {
+                closeBtn.addEventListener('click', (e) => {
+                    const overlay = e.currentTarget.closest('.article-summary-overlay');
+                    overlay.classList.add('hidden');
+                });
+            });
+        }
+
+        function updateArticlesPagination(totalPages, current) {
+            const info = document.getElementById('articlesPageInfo');
+            const prev = document.getElementById('prevArticlesPage');
+            const next = document.getElementById('nextArticlesPage');
+            if (info) info.textContent = `Page ${current} of ${totalPages}`;
+            if (prev) prev.disabled = current <= 1;
+            if (next) next.disabled = current >= totalPages;
+        }
+
+        // Wire UI
+        const btn = document.getElementById('articleSearchBtn');
+        const input = document.getElementById('articleSearchInput');
+        const prev = document.getElementById('prevArticlesPage');
+        const next = document.getElementById('nextArticlesPage');
+
+        if (btn) btn.addEventListener('click', async () => {
+            articleQuery = (input?.value || '').trim();
+            articlePage = 1;
+            await loadArticles(articlePage, articleQuery);
+        });
+        if (input) input.addEventListener('keypress', async (e) => {
+            if (e.key === 'Enter') {
+                articleQuery = (input?.value || '').trim();
+                articlePage = 1;
+                await loadArticles(articlePage, articleQuery);
+            }
+        });
+        if (prev) prev.addEventListener('click', async () => {
+            if (articlePage > 1) {
+                articlePage--;
+                await loadArticles(articlePage, articleQuery);
+            }
+        });
+        if (next) next.addEventListener('click', async () => {
+            articlePage++;
+            await loadArticles(articlePage, articleQuery);
+        });
+
+        // Expose global loader for integration with main search bar
+        window.__articlesLoad = async (p, s) => {
+            articlePage = p || 1;
+            articleQuery = s || '';
+            await loadArticles(articlePage, articleQuery);
+        };
+        // Initial load
+        loadArticles(articlePage, articleQuery).catch(console.error);
+    })();
+    </script>
+    <script>
+// Check if user is admin and show admin link
+fetch('/api/auth/check')
+    .then(response => response.json())
+    .then(result => {
+        if (result.loggedIn && result.isAdmin) {
+            const navLinks = document.querySelector('.nav-links');
+            if (navLinks) {
+                const adminLink = document.createElement('a');
+                adminLink.href = '/admin';
+                adminLink.className = 'nav-link';
+                adminLink.innerHTML = '<i class="fas fa-cog"></i> Admin';
+                navLinks.insertBefore(adminLink, navLinks.querySelector('.logout'));
+            }
+        }
+    });
+</script>
+</body>
+</html>

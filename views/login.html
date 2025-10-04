@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Biology Dashboard - Login</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/animations.css">
+    <link rel="stylesheet" href="/css/responsive.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="login-body">
+    <div class="stars"></div>
+    <div class="twinkling"></div>
+    
+    <div class="login-container">
+        <div class="login-card">
+            <div class="logo-section">
+                <div class="planet-animation">
+                    <div class="planet"></div>
+                    <div class="orbit"></div>
+                    <div class="satellite"></div>
+                </div>
+                <h1 class="logo-text">SPACE BIOLOGY<span>DASHBOARD</span></h1>
+                <p class="tagline">Exploring Life in Microgravity</p>
+                <div class="dna-animation">
+                    <div class="dna-strand">
+                        <div class="dna-base"></div>
+                        <div class="dna-base"></div>
+                        <div class="dna-base"></div>
+                        <div class="dna-base"></div>
+                        <div class="dna-base"></div>
+                        <div class="dna-base"></div>
+                    </div>
+                </div>
+            </div>
+
+            <form id="loginForm" class="auth-form">
+                <div class="form-group">
+                    <label for="email"><i class="fas fa-envelope"></i> Email</label>
+                    <input type="email" id="email" name="email" required placeholder="astronaut@nasa.gov">
+                    <span class="focus-border"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="password"><i class="fas fa-lock"></i> Password</label>
+                    <input type="password" id="password" name="password" required placeholder="••••••••">
+                    <span class="focus-border"></span>
+                </div>
+
+                <button type="submit" class="btn-login">
+                    <span>Launch Dashboard</span>
+                    <div class="rocket-icon">🚀</div>
+                </button>
+            </form>
+
+            <div class="auth-switch">
+                <p>New to space biology? <a href="#" id="showRegister">Create Account</a></p>
+            </div>
+
+            <div class="login-features">
+                <div class="feature">
+                    <i class="fas fa-dna"></i>
+                    <span>Explore Biological Research</span>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Interactive Data Visualizations</span>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-search"></i>
+                    <span>Advanced Search & Filters</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="login-card register-card hidden">
+            <div class="logo-section">
+                <h2>Join the Mission</h2>
+                <p>Create your research account</p>
+                <div class="microscope-view">
+                    <div class="microscope-slide">🔬</div>
+                </div>
+            </div>
+
+            <form id="registerForm" class="auth-form">
+                <div class="form-group">
+                    <label for="regUsername"><i class="fas fa-user-astronaut"></i> Username</label>
+                    <input type="text" id="regUsername" name="username" required placeholder="SpaceResearcher">
+                    <span class="focus-border"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="regEmail"><i class="fas fa-envelope"></i> Email</label>
+                    <input type="email" id="regEmail" name="email" required placeholder="researcher@nasa.gov">
+                    <span class="focus-border"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="regPassword"><i class="fas fa-lock"></i> Password</label>
+                    <input type="password" id="regPassword" name="password" required placeholder="Minimum 6 characters">
+                    <span class="focus-border"></span>
+                </div>
+
+                <button type="submit" class="btn-login">
+                    <span>Create Account</span>
+                    <div class="rocket-icon">👨‍🚀</div>
+                </button>
+            </form>
+
+            <div class="auth-switch">
+                <p>Already have an account? <a href="#" id="showLogin">Sign In</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/auth.js"></script>
+    <script src="/js/animations.js"></script>
+</body>
+</html>

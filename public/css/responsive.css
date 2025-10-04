@@ -1,0 +1,360 @@
+/* Responsive Design for Space Biology Dashboard */
+
+/* Large Desktops */
+@media (min-width: 1200px) {
+    .dashboard-container {
+        max-width: 1400px;
+    }
+    
+    .experiments-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Tablets and Small Desktops */
+@media (max-width: 1199px) and (min-width: 768px) {
+    .dashboard-container {
+        padding: 1.5rem;
+    }
+    
+    .experiments-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .charts-section {
+        grid-template-columns: 1fr;
+    }
+    
+    .stats-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .navbar {
+        padding: 1rem;
+    }
+    
+    .nav-links {
+        gap: 1rem;
+    }
+}
+
+/* Mobile Devices */
+@media (max-width: 767px) {
+    .dashboard-container {
+        padding: 1rem;
+    }
+    
+    .dashboard-header h1 {
+        font-size: 2rem;
+    }
+    
+    .experiments-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .stats-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .charts-section {
+        grid-template-columns: 1fr;
+    }
+    
+    .filters-section {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .filter-group {
+        width: 100%;
+    }
+    
+    .search-container {
+        flex-direction: column;
+    }
+    
+    .search-container input {
+        margin-bottom: 1rem;
+    }
+    
+    .navbar {
+        flex-direction: column;
+        padding: 1rem;
+    }
+    
+    .nav-links {
+        flex-direction: column;
+        gap: 0.5rem;
+        margin-top: 1rem;
+    }
+    
+    .nav-link {
+        justify-content: center;
+    }
+    
+    .pagination {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+    }
+    
+    /* Login page mobile */
+    .login-container {
+        padding: 1rem;
+    }
+    
+    .login-card {
+        width: 100%;
+        padding: 2rem;
+    }
+    
+    /* About page mobile */
+    .timeline::before {
+        left: 30px;
+    }
+    
+    .timeline-item {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-left: 60px;
+    }
+    
+    .timeline-year {
+        margin-bottom: 1rem;
+    }
+    
+    .timeline-content {
+        width: 100%;
+    }
+    
+    .timeline-content::before {
+        left: -30px !important;
+        right: auto !important;
+    }
+    
+    /* Contact page mobile */
+    .contact-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .team-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .tech-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Small Mobile Devices */
+@media (max-width: 480px) {
+    .dashboard-header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .dashboard-header p {
+        font-size: 0.9rem;
+    }
+    
+    .stat-card {
+        padding: 1rem;
+    }
+    
+    .stat-icon {
+        font-size: 2rem;
+    }
+    
+    .stat-content h3 {
+        font-size: 1.5rem;
+    }
+    
+    .experiment-card {
+        padding: 1rem;
+    }
+    
+    .experiment-meta {
+        gap: 0.5rem;
+    }
+    
+    .meta-tag {
+        font-size: 0.7rem;
+        padding: 0.2rem 0.6rem;
+    }
+    
+    .chart-container {
+        padding: 1rem;
+    }
+    
+    .chart {
+        height: 200px;
+    }
+    
+    /* Login page small mobile */
+    .login-card {
+        padding: 1.5rem;
+    }
+    
+    .logo-text {
+        font-size: 1.5rem;
+    }
+    
+    .planet-animation {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .planet {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .orbit {
+        width: 70px;
+        height: 70px;
+    }
+}
+
+/* Landscape Mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+    .login-body {
+        align-items: flex-start;
+        padding: 1rem;
+    }
+    
+    .login-card {
+        padding: 1.5rem;
+    }
+    
+    .logo-section {
+        margin-bottom: 1rem;
+    }
+    
+    .planet-animation {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 0.5rem;
+    }
+    
+    .auth-form {
+        gap: 1rem;
+    }
+}
+
+/* High DPI Screens */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .stars::before {
+        background-image: 
+            radial-gradient(1px 1px at 20px 30px, #eee, transparent),
+            radial-gradient(1px 1px at 40px 70px, rgba(255,255,255,0.5), transparent),
+            radial-gradient(0.5px 0.5px at 90px 40px, #fff, transparent),
+            radial-gradient(0.5px 0.5px at 130px 80px, rgba(255,255,255,0.8), transparent),
+            radial-gradient(1px 1px at 160px 30px, #ddd, transparent);
+    }
+}
+
+/* Print Styles */
+@media print {
+    .navbar,
+    .search-section,
+    .filters-section,
+    .action-buttons,
+    .nav-links {
+        display: none;
+    }
+    
+    .dashboard-container {
+        padding: 0;
+    }
+    
+    .experiment-card {
+        break-inside: avoid;
+        border: 1px solid #000;
+        box-shadow: none;
+    }
+    
+    .stat-card {
+        border: 1px solid #000;
+    }
+    
+    body {
+        background: white !important;
+        color: black !important;
+    }
+    
+    .chart {
+        border: 1px solid #000;
+    }
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .stars::before {
+        animation: none;
+    }
+    
+    .twinkling {
+        animation: none;
+    }
+    
+    .login-card {
+        animation: none;
+    }
+    
+    .stat-animation {
+        animation: none;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    /* Already dark themed, but ensure compatibility */
+    body {
+        background: var(--space-blue);
+        color: var(--text-primary);
+    }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+    .experiment-card:hover {
+        transform: none;
+    }
+    
+    .stat-card:hover {
+        transform: none;
+    }
+    
+    .feature-card:hover {
+        transform: none;
+    }
+    
+    .btn-primary:hover,
+    .btn-secondary:hover {
+        transform: none;
+    }
+    
+    /* Increase tap targets for mobile */
+    .nav-link {
+        padding: 1rem;
+    }
+    
+    .btn-primary,
+    .btn-secondary {
+        padding: 1rem 1.5rem;
+    }
+    
+    .meta-tag {
+        padding: 0.5rem 1rem;
+    }
+}
