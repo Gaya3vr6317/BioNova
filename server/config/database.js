@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
+const MONGODB_URI = (process.env.MONGODB_URI || '').trim();
 
-// Connection strings to try in order
-const connectionStrings = [
+// Connection strings to try in order (env first if provided)
+const connectionStrings = MONGODB_URI ? [MONGODB_URI] : [
     'mongodb://127.0.0.1:27017/space_biology',
     'mongodb://localhost:27017/space_biology',
     'mongodb://0.0.0.0:27017/space_biology'
@@ -12,8 +13,9 @@ const RETRY_INTERVAL_MS = parseInt(process.env.DB_RETRY_INTERVAL_MS || '10000', 
 let retryTimer = null;
 
 const connectOptions = {
-    serverSelectionTimeoutMS: 2000, // fail fast so we can retry
-    maxPoolSize: 5
+    // Use a longer timeout in production or when using a remote cluster (e.g., Atlas)
+    serverSelectionTimeoutMS: parseInt(process.env.MONGO_SERVER_SELECTION_TIMEOUT_MS || (MONGODB_URI ? '10000' : '2000'), 10),
+    maxPoolSize: parseInt(process.env.MONGO_MAX_POOL_SIZE || '5', 10)
 };
 
 async function tryConnectOnce() {
@@ -66,6 +68,11 @@ mongoose.connection.on('disconnected', () => {
 
 // Exposed initializer
 const connectDB = () => {
+    // In production, do not attempt to connect if no MONGODB_URI is provided
+    if (process.env.NODE_ENV === 'production' && !MONGODB_URI) {
+        console.log('🛑 No MONGODB_URI provided in production. Running without database (offline mode).');
+        return;
+    }
     attemptConnect().catch(error => {
         console.error('❌ Database connection error:', error.message);
     });
