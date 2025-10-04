@@ -1,6 +1,26 @@
-# Space Biology Knowledge Engine
+# BioNova🚀
+_“Weaving Knowledge, Driving Exploration.”_
 
-A comprehensive dashboard for exploring NASA's space biology research data.
+BioNova is a knowledge engine designed to make NASA’s space biology research accessible, searchable, and actionable. By integrating bioscience publications, experiment data, and mission details into one dynamic platform, it allows users to explore the impacts and results of space biology experiments through intuitive keyword searches, interactive visualizations, and AI-generated summaries.
+
+This platform bridges the gap between raw scientific data and human understanding, enabling researchers, educators, students, and innovators to quickly uncover insights, accelerate discovery, and support the development of sustainable life systems for future human space exploration. BioSpace Atlas transforms decades of scattered research into a unified resource that fuels learning, innovation, and humanity’s journey beyond Earth.
+
+## Team Name: AstroNerve
+### Team Members
+1.Hafis Mohammed 
+2.Jaishook K V
+3.Jasmin Varghese
+4.Gayathri V R
+5.Chetan Krishna
+6.Thanush P Anoop
+
+### Problem Statement
+As humanity prepares to embark on a new era of space exploration — returning to the Moon and setting its sights on Mars — understanding how life responds and adapts to space environments is more critical than ever. Over the past decades, NASA has conducted countless biological experiments aboard space missions, generating a vast body of scientific knowledge. These findings hold essential clues to sustaining human life beyond Earth — from maintaining astronaut health to growing food and developing resilient life-support systems.
+However, despite being publicly available, this knowledge is scattered across numerous scientific publications, mission reports, and databases, making it difficult for researchers, educators, and innovators to find relevant information quickly. The lack of a unified, user-friendly way to search, interpret, and connect this data limits how effectively it can be used to advance future missions and scientific breakthroughs.
+
+### Problem Solution
+Our project, BioNova, addresses this challenge by creating a dynamic, AI-powered web platform that brings NASA’s space biology knowledge into one intuitive and accessible space. The platform allows users to enter a keyword or topic and instantly explore related bioscience publications, experiment results, and mission details. Using tools like artificial intelligence, natural language processing, and knowledge graphs, BioNova summarizes complex research into concise insights and interactive visualizations, enabling users to understand impacts and relationships at a glance.
+By transforming scattered data into an organized, searchable knowledge engine, BioSpace Atlas accelerates discovery, supports mission planning, and empowers scientists, students, and innovators to build the biological foundations for humanity’s future in space.
 
 ## Features
 
@@ -13,7 +33,38 @@ A comprehensive dashboard for exploring NASA's space biology research data.
 - MongoDB integration with offline fallback and auto-retry
 - Contact form functionality
 
----
+## Technical Details
+### Technical Components Used
+- Node.js
+- MongoDB
+- JavaScript ES6+
+- CSS3
+- HTML5
+- Python
+- Data Visualization
+
+# Link to product walkthrough
+
+
+## How it works?
+🔍 Keyword Search: Users enter a biological keyword (e.g., organism, condition, experiment) into the platform.
+
+🧠 Data Retrieval: The system searches NASA’s bioscience datasets and research archives for relevant information.
+
+🧪 AI Processing: Natural language processing and AI summarization organize and condense complex scientific data.
+
+🌐 Knowledge Mapping: Information is structured into a connected knowledge base, showing relationships between experiments, organisms, and outcomes.
+
+📊 Visualization: Results are displayed through interactive dashboards and visualizations for easy exploration and understanding.
+
+🚀 Accessible Insights: Users receive concise summaries, key findings, and experiment details — all in one place.
+
+## How to Run
+- Ensure Dependencies Are Installed
+- Start the Backend Server
+- Start the Frontend Application
+- Open the Application
+- Explore BioNova
 
 ## Quickstart (Linux/Kali/Debian)
 
@@ -133,3 +184,9 @@ tail -n 100 /home/kali/mongod.log
 - `npm run start` — Start server
 - `npm run dev` — Start with nodemon (auto-restart on changes)
 - `npm run fix-port` — Free port 3000 on macOS/Linux/Windows
+
+# Future Plans
+In the future, we envision BioNova evolving into a comprehensive and intelligent platform that goes beyond information retrieval. Our goal is to integrate a broader range of NASA datasets, research papers, and mission archives, creating a richer and more connected knowledge base. With advancements in AI and semantic search, BioNova will be able to understand context, offer deeper insights, and even predict biological outcomes in space environments.
+
+We also aim to introduce dynamic knowledge graphs to visualize complex relationships between experiments, organisms, and environmental factors, making exploration more intuitive. Collaborative tools and educational features will further transform BioNova into an interactive space where scientists, students, and enthusiasts can share insights and build upon existing research. Ultimately, BioNova aspires to become a trusted hub that not only organizes space biology knowledge but also supports the next generation of discoveries in space exploration.
+
