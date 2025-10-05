@@ -14,9 +14,11 @@ This platform bridges the gap between raw scientific data and human understandin
 5.Chetan Krishna
 6.Thanush P Anoop
 
+
 ### Problem Statement
 As humanity prepares to embark on a new era of space exploration — returning to the Moon and setting its sights on Mars — understanding how life responds and adapts to space environments is more critical than ever. Over the past decades, NASA has conducted countless biological experiments aboard space missions, generating a vast body of scientific knowledge. These findings hold essential clues to sustaining human life beyond Earth — from maintaining astronaut health to growing food and developing resilient life-support systems.
 However, despite being publicly available, this knowledge is scattered across numerous scientific publications, mission reports, and databases, making it difficult for researchers, educators, and innovators to find relevant information quickly. The lack of a unified, user-friendly way to search, interpret, and connect this data limits how effectively it can be used to advance future missions and scientific breakthroughs.
+
 
 ### Problem Solution
 Our project, BioNova, addresses this challenge by creating a dynamic, AI-powered web platform that brings NASA’s space biology knowledge into one intuitive and accessible space. The platform allows users to enter a keyword or topic and instantly explore related bioscience publications, experiment results, and mission details. Using tools like artificial intelligence, natural language processing, and knowledge graphs, BioNova summarizes complex research into concise insights and interactive visualizations, enabling users to understand impacts and relationships at a glance.
@@ -33,6 +35,7 @@ By transforming scattered data into an organized, searchable knowledge engine, B
 - MongoDB integration with offline fallback and auto-retry
 - Contact form functionality
 
+
 ## Technical Details
 ### Technical Components Used
 - Node.js
@@ -40,8 +43,7 @@ By transforming scattered data into an organized, searchable knowledge engine, B
 - JavaScript ES6+
 - CSS3
 - HTML5
-- Python
-- Data Visualization
+
 
 # Link to product walkthrough
 https://www.canva.com/design/DAG00nHsml8/Z4dye0Q7qjlka3q1SRA1BQ/edit
