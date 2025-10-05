@@ -199,6 +199,9 @@ tail -n 100 /home/kali/mongod.log
 - `npm run dev` — Start with nodemon (auto-restart on changes)
 - `npm run fix-port` — Free port 3000 on macOS/Linux/Windows
 
+# Team Photo
+
+
 # Future Plans
 In the future, we envision BioNova evolving into a comprehensive and intelligent platform that goes beyond information retrieval. Our goal is to integrate a broader range of NASA datasets, research papers, and mission archives, creating a richer and more connected knowledge base. With advancements in AI and semantic search, BioNova will be able to understand context, offer deeper insights, and even predict biological outcomes in space environments.
 
