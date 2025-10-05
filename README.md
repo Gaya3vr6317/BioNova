@@ -44,7 +44,7 @@ By transforming scattered data into an organized, searchable knowledge engine, B
 - Data Visualization
 
 # Link to product walkthrough
-
+https://www.canva.com/design/DAG00nHsml8/Z4dye0Q7qjlka3q1SRA1BQ/edit?utm_content=DAG00nHsml8&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
 
 ## How it works?
 🔍 Keyword Search: Users enter a biological keyword (e.g., organism, condition, experiment) into the platform.
