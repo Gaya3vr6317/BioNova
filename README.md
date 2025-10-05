@@ -66,6 +66,20 @@ https://www.canva.com/design/DAG00nHsml8/Z4dye0Q7qjlka3q1SRA1BQ/edit?utm_content
 - Open the Application
 - Explore BioNova
 
+## Screenshots
+![Screenshot1]![image]![frontpage](https://github.com/user-attachments/assets/5eb02743-8ad9-4863-accb-2415e095e1e2)
+*Home page*
+
+![Screenshot2]![image]![Articles](https://github.com/user-attachments/assets/32f4a210-6d2d-4a7b-b0ce-59577b37de1c)
+*Articles page*
+
+![Screenshot3]!![image]![about page](https://github.com/user-attachments/assets/9887cfe3-6aec-445f-81ea-7962e4db3dce)
+*About page*
+
+![Screenshot4]!![image]<img width="1896" height="964" alt="Screenshot 2025-10-04 165834" src="https://github.com/user-attachments/assets/4857000b-a6a3-428a-880e-4432da692094" />
+*History of space biology*
+
+
 ## Quickstart (Linux/Kali/Debian)
 
 Follow these steps in order to run the app smoothly. This method starts MongoDB without requiring a system service.
