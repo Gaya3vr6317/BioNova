@@ -3,7 +3,7 @@ _“Weaving Knowledge, Driving Exploration.”_
 
 BioNova is a knowledge engine designed to make NASA’s space biology research accessible, searchable, and actionable. By integrating bioscience publications, experiment data, and mission details into one dynamic platform, it allows users to explore the impacts and results of space biology experiments through intuitive keyword searches, interactive visualizations, and AI-generated summaries.
 
-This platform bridges the gap between raw scientific data and human understanding, enabling researchers, educators, students, and innovators to quickly uncover insights, accelerate discovery, and support the development of sustainable life systems for future human space exploration. BioSpace Atlas transforms decades of scattered research into a unified resource that fuels learning, innovation, and humanity’s journey beyond Earth.
+This platform bridges the gap between raw scientific data and human understanding, enabling researchers, educators, students, and innovators to quickly uncover insights, accelerate discovery, and support the development of sustainable life systems for future human space exploration. BioNova transforms decades of scattered research into a unified resource that fuels learning, innovation, and humanity’s journey beyond Earth.
 
 ## Team Name: AstroNerve
 ### Team Members
@@ -22,7 +22,7 @@ However, despite being publicly available, this knowledge is scattered across nu
 
 ### Problem Solution
 Our project, BioNova, addresses this challenge by creating a dynamic, AI-powered web platform that brings NASA’s space biology knowledge into one intuitive and accessible space. The platform allows users to enter a keyword or topic and instantly explore related bioscience publications, experiment results, and mission details. Using tools like artificial intelligence, natural language processing, and knowledge graphs, BioNova summarizes complex research into concise insights and interactive visualizations, enabling users to understand impacts and relationships at a glance.
-By transforming scattered data into an organized, searchable knowledge engine, BioSpace Atlas accelerates discovery, supports mission planning, and empowers scientists, students, and innovators to build the biological foundations for humanity’s future in space.
+By transforming scattered data into an organized, searchable knowledge engine, BioNova accelerates discovery, supports mission planning, and empowers scientists, students, and innovators to build the biological foundations for humanity’s future in space.
 
 ## Features
 
